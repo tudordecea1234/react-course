@@ -5,12 +5,21 @@ import './App.css'
 import { OrdersPage } from './pages/OrdersPage.jsx';
 import { TrackingPage } from './pages/TrackingPage.jsx';
 import { NotFoundPage } from './pages/NotFoundPage.jsx';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 function App() {
+  const [cartItems, setCartItems] = useState([]);
+  useEffect(() => {
+    axios.get('/api/cart-items')
+      .then((response) => {
+        setCartItems(response.data);
+      })
+  }, []);
   return (
     <Routes>
-      <Route index element={<HomePage />} />
-      <Route path="checkout" element={<CheckoutPage />} />
+      <Route index element={<HomePage cartItems={cartItems}/>} />
+      <Route path="checkout" element={<CheckoutPage cartItems={cartItems}/>} />
       <Route path="orders" element={<OrdersPage />} />
       <Route path="tracking" element={<TrackingPage />} />
       <Route path="*" element={<NotFoundPage />} />
