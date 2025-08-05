@@ -1,14 +1,18 @@
 import './CheckoutHeader.css';
-import {Link} from 'react-router';
+import { Link } from 'react-router';
+import mobileLogo from '../../assets/images/mobile-logo.png';
+import logo from '../../assets/images/logo.png';
+import checkoutLockIcon from '../../assets/images/icons/checkout-lock-icon.png';
 
-export function CheckoutHeader(){
+export function CheckoutHeader() {
     return (
-         <div className="checkout-header">
+        <>
+            <div className="checkout-header">
                 <div className="header-content">
                     <div className="checkout-header-left-section">
                         <Link to="/">
-                            <img className="logo" src="images/logo.png" />
-                            <img className="mobile-logo" src="images/mobile-logo.png" />
+                            <img className="logo" src={logo} />
+                            <img className="mobile-logo" src={mobileLogo}/>
                         </Link>
                     </div>
 
@@ -18,9 +22,10 @@ export function CheckoutHeader(){
                     </div>
 
                     <div className="checkout-header-right-section">
-                        <img src="images/icons/checkout-lock-icon.png" />
+                        <img src={checkoutLockIcon}/>
                     </div>
                 </div>
             </div>
+        </>
     )
 }
