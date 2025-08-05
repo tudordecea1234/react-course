@@ -12,17 +12,22 @@ export function HomePage() {
     //         console.log(data);
     //     })
     const [products, setProducts] = useState([]);
+    const [cartItems, setCartItems] = useState([]);
 
     useEffect(() => {
         axios.get('http://localhost:3000/api/products')
             .then((response) => {
                 setProducts(response.data);
             })
+        axios.get('http://localhost:3000/api/cart-items')
+            .then((response) => {
+                setCartItems(response.data);
+            })
     }, []);
 
     return (
         <>
-            <Header />
+            <Header cart={cartItems}/>
             <link rel="icon" type="image/svg+xml" href="home-favicon.png" />
             <div className="home-page">
                 <div className="products-grid">
