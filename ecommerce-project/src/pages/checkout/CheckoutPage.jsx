@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { OrderSummary } from './OrderSummary.jsx';
 import { PaymentSummary } from './PaymentSummary.jsx';
 
-export function CheckoutPage({ cartItems }) {
+export function CheckoutPage({ cartItems, loadCart }) {
     const [deliveryOptions, setDeliveryOptions] = useState([]);
     const [paymentSummary, setPaymentSummary] = useState(null);
 
@@ -15,13 +15,14 @@ export function CheckoutPage({ cartItems }) {
             setDeliveryOptions(response.data);
         };
         fetchDeliveryOptions();
+    }, []);
+    useEffect(() => {
         const fetchPaymentSummary = async () => {
             const response = await axios.get('/api/payment-summary');
             setPaymentSummary(response.data);
         }
         fetchPaymentSummary();
-    }, []);
-
+    }, [cartItems]);
 
     return (
         <>
@@ -32,7 +33,7 @@ export function CheckoutPage({ cartItems }) {
                 <div className="page-title">Review your order</div>
 
                 <div className="checkout-grid">
-                    <OrderSummary cartItems={cartItems} deliveryOptions={deliveryOptions} />
+                    <OrderSummary cartItems={cartItems} deliveryOptions={deliveryOptions} loadCart={loadCart} />
 
                     <PaymentSummary paymentSummary={paymentSummary} />
                 </div>
