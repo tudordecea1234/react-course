@@ -4,7 +4,7 @@ import './HomePage.css'
 import { Header } from '../../components/Header.jsx';
 import { ProductsGrid } from './ProductsGrid.jsx';
 
-export function HomePage({ cartItems }) {
+export function HomePage({ cartItems, loadCart }) {
     // fetch('http://localhost:3000/api/products')
     //     .then((response) => {
     //         return response.json()
@@ -26,7 +26,7 @@ export function HomePage({ cartItems }) {
             <Header cart={cartItems} />
             <link rel="icon" type="image/svg+xml" href="home-favicon.png" />
             <div className="home-page">
-                <ProductsGrid products={products} />
+                <ProductsGrid products={products} loadCart={loadCart}/>
             </div>
         </>
     )
